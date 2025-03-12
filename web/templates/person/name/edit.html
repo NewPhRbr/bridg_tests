@@ -10,13 +10,13 @@
     <div class="btn-group">
         <button class="btn btn-primary" type="submit" form="person-name-form">{{ _("Save") }}</button>
         <div class="btn-group">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle" id="actions" type="button" data-bs-toggle="dropdown">
                 {{ _("Actions") }}
             </button>
             <ul class="dropdown-menu">
                 {% if object %}
                 <li>
-                    <a class="dropdown-item" href="#" hx-delete="{{ url_for('.delete', person_id=person_id, id=id) }}">
+                    <a class="dropdown-item" href="#" id="delete" hx-delete="{{ url_for('.delete', person_id=person_id, id=id) }}">
                         {{ _("Delete") }}
                     </a>
                 </li>

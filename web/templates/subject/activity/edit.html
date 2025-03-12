@@ -11,12 +11,12 @@
 <div class="btn-group">
     <button class="btn btn-primary" type="submit" form="activity-form">{{ _("Save") }}</button>
     <div class="btn-group">
-        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" id="actions" type="button" data-bs-toggle="dropdown">
             {{ _("Actions") }}
         </button>
         <ul class="dropdown-menu">
             <li>
-                <a class="dropdown-item" href="#"
+                <a class="dropdown-item" href="#"  id="delete"
                     hx-delete="{{ url_for('.delete', space_id=space_id, subject_id=subject_id, id=id) }}">
                     {{ _("Delete") }}
                 </a>

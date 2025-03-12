@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block titlebar_right %}
-<a class="btn btn-danger" href="#" hx-delete="{{ url_for('.delete', space_id=space_id, id=subject.id) }}">
+<a class="btn btn-danger" href="#"  id="delete" hx-delete="{{ url_for('.delete', space_id=space_id, id=subject.id) }}">
     {{ _("Delete") }}
 </a>
 {% endblock %}
