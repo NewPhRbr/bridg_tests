@@ -8,7 +8,8 @@ from web.views import BreadcrumbsMixin, ContextMixin, CreateView, DeleteView, Ed
 
 from .form import TelecomForm
 
-blueprint = Blueprint("telecom_address", __name__, url_prefix="/telecom_address")
+blueprint = Blueprint("telecom_address", __name__,
+                      url_prefix="/telecom_address")
 
 
 class PersonMixin(ContextMixin, SQLAlchemyMixin):
@@ -28,9 +29,10 @@ class TelecomCreateView(PersonMixin, BreadcrumbsMixin, CreateView):
     form_class = TelecomForm
     template_name = "person/telecom_address/edit.html"
 
-    def get_data(self, form, person_id, **kwargs):
-        data = super().get_data(form, person_id=person_id, **kwargs)
+    def get_data(self, form, person_id, scheme, **kwargs):
+        data = super().get_data(form, person_id=person_id, scheme=scheme, **kwargs)
         data["person_id"] = person_id
+        data["scheme"] = scheme
         return data
 
     def url_for_redirect(self, person_id, **kwargs):
@@ -53,7 +55,8 @@ class TelecomEditView(PersonMixin, BreadcrumbsMixin, EditView):
 
     def setup_breadcrumbs(self, person_id, **kwargs):
         self.add_breadcrumb(None, _("Persons"))
-        self.add_breadcrumb("person.show", str(self.object.person_id), id=person_id)
+        self.add_breadcrumb("person.show", str(
+            self.object.person_id), id=person_id)
         self.add_breadcrumb("person.edit", _("Edit"))
 
 
@@ -67,4 +70,5 @@ class TelecomFormDeleteView(HTMXDeleteMixin, DeleteView):
 
 blueprint.add_url_rule("/new", view_func=TelecomCreateView.as_view("new"))
 blueprint.add_url_rule("/<id>/edit", view_func=TelecomEditView.as_view("edit"))
-blueprint.add_url_rule("/<id>", view_func=TelecomFormDeleteView.as_view("delete"))
+blueprint.add_url_rule(
+    "/<id>", view_func=TelecomFormDeleteView.as_view("delete"))
