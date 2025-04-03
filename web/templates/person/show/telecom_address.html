@@ -1,32 +1,28 @@
 <div class="card col-4">
-    <div class="card-header">
-        <div class="d-flex">
+        <div class="d-flex card-header">
             <b>{{ _("Telecom") }}</b>
             <a class="ms-auto" type="button" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside">
                     <i class="fa-solid fa-plus"></i>
                     {{ _("Add") }}
             </a>
-            <ul class="dropdown-menu">
-                <li>
-                    <div class="dropdown dropend">
-                        <li> 
-                            <a class="ms-auto" href="{{ url_for('.telecom_address.new', person_id=person.id, scheme='mailto') }}">
-                                <i class="fa-solid fa-plus"></i>
-                                {{ _("Email") }}
-                            </a>
-                        </li>
-                        <li>
-                            <a class="ms-auto" href="{{ url_for('.telecom_address.new', person_id=person.id, scheme='tel') }}">
-                                <i class="fa-solid fa-plus"></i>
-                                {{ _("Number") }}
-                            </a>
-                        </li>
-                    </div>
-                </li>
-            </ul>
+            <div class="dropdown dropend">
+                <ul class="dropdown-menu">
+                    <li class="dropdown-item">
+                        <a class="ms-auto" href="{{ url_for('.telecom_address.new', person_id=person.id, scheme='mailto') }}">
+                            <i class="fa-solid fa-plus"></i>
+                            {{ _("Email") }}
+                        </a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a class="ms-auto" href="{{ url_for('.telecom_address.new', person_id=person.id, scheme='tel') }}">
+                            <i class="fa-solid fa-plus"></i>
+                            {{ _("Number") }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    <div class="card-body">
         <table class="table">
             <tbody>
                 {% for tel in person.telecom_address %}
