@@ -7,8 +7,6 @@ from flask import Flask
 
 from web.app import app as test_app
 
-test_app.logger.addHandler(logging.FileHandler(filename='errorlog'))
-
 
 @pytest.fixture(scope="session")
 def app():
