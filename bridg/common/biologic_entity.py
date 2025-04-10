@@ -37,12 +37,13 @@ class BiologicEntity(Base):
     death_date_estimated_indicator: Mapped[Optional[bool]]
     death_indicator: Mapped[Optional[bool]]
 
-    name: Mapped[List[EntityName]] = relationship(back_populates="biologic_entity", cascade="all, delete-orphan")
+    name: Mapped[List[EntityName]] = relationship(
+        back_populates="biologic_entity", cascade="all, delete-orphan")
 
     # FIXME: return something more meaningfull than first entry
     @property
     def primary_name(self) -> Optional[EntityName]:
-        return next(n for n in self.name)
+        return next((n for n in self.name), None)
 
     def __str__(self):
         if not self.primary_name:
