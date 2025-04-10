@@ -41,8 +41,8 @@ def test_postal_delete(app, server, page: Page):
         url = app.url_for("person.postal_address.edit",
                           person_id=src['person_id'], id=src['id'])
         page.goto(url)
-        page.locator('button').filter(has_text='Actions').click()
-        page.locator('a').filter(has_text='Delete').click()
+        page.locator('#actions').click()
+        page.locator('#delete').click()
         page.wait_for_url(app.url_for("person.show", id=src['person_id']))
         result = db.session.query(
             PostalAddress).filter_by(id=src['id']).all()

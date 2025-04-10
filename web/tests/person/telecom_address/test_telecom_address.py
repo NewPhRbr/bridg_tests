@@ -30,8 +30,9 @@ def test_telecom_edit(app, server, page: Page):
 
 def test_telecom_new(app, server, page: Page):
     src = {'use': None, 'address': '+1-214-559-6993',
-           'person_id': 7, 'scheme': None}
-    url = app.url_for("person.telecom_address.new", person_id=src['person_id'])
+           'person_id': 7, 'scheme': 'tel'}
+    url = app.url_for("person.telecom_address.new",
+                      person_id=src['person_id'], scheme=src['scheme'])
     page.goto(url)
     page.locator("id=address").fill(src['address'])
     form = page.locator('#person-telecom-form')
@@ -60,8 +61,8 @@ def test_telecom_delete(app, server, page: Page):
         url = app.url_for("person.telecom_address.edit",
                           person_id=src['person_id'], id=src['id'])
         page.goto(url)
-        page.locator('button').filter(has_text='Actions').click()
-        page.locator('a').filter(has_text='Delete').click()
+        page.locator('#actions').click()
+        page.locator('#delete').click()
         page.wait_for_url(app.url_for("person.show", id=src['person_id']))
         result = db.session.query(
             TelecommunicationAddress).filter_by(id=src['id']).all()
